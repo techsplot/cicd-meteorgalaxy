@@ -28,4 +28,4 @@ jobs:
 
       - name: Deploy to Galaxy
         run: |
-          meteor deploy cicd-meteorgalaxy.meteorapp.com --settings settings.json
+          meteor deploy cicd-meteorgalaxy.meteorapp.com --settings settings.json --free
