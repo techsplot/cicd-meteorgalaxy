@@ -28,4 +28,5 @@ jobs:
 
       - name: Deploy to Galaxy
         run: |
-          meteor deploy cicd-meteorgalaxy.meteorapp.com --settings settings.json --free
+          echo '${{ secrets.METEOR_SETTINGS }}' > settings.json
+          meteor deploy cicd-meteorgalaxy.sandbox.galaxycloud.app --settings settings.json --free
