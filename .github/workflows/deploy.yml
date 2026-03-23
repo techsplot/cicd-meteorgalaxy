@@ -1,0 +1,31 @@
+name: Deploy to Galaxy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Meteor
+        run: curl https://install.meteor.com/ | sh
+
+      - name: Add Meteor to PATH
+        run: echo "$HOME/.meteor" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: meteor npm install
+
+      - name: Restore Meteor session
+        run: |
+          echo "${{ secrets.METEOR_SESSION }}" | base64 --decode > ~/.meteorsession
+
+      - name: Deploy to Galaxy
+        run: |
+          meteor deploy cicd-meteorgalaxy.meteorapp.com --settings settings.json
