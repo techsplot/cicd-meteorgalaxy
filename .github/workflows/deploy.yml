@@ -26,7 +26,11 @@ jobs:
         run: |
           echo "${{ secrets.METEOR_SESSION }}" | base64 --decode > ~/.meteorsession
 
+      - name: Write settings
+        run: echo '${{ secrets.METEOR_SETTINGS }}' > settings.json
+
+      - name: Debug settings
+        run: cat settings.json
+
       - name: Deploy to Galaxy
-        run: |
-          echo '${{ secrets.METEOR_SETTINGS }}' > settings.json
-          meteor deploy cicd-meteorgalaxy.sandbox.galaxycloud.app --settings settings.json --free
+        run: meteor deploy cicd-meteorgalaxy.sandbox.galaxycloud.app --settings settings.json --free
