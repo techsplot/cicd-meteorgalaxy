@@ -29,8 +29,5 @@ jobs:
       - name: Write settings
         run: echo '${{ secrets.METEOR_SETTINGS }}' > settings.json
 
-      - name: Debug settings
-        run: cat settings.json
-
       - name: Deploy to Galaxy
         run: meteor deploy cicd-meteorgalaxy.sandbox.galaxycloud.app --settings settings.json --free
